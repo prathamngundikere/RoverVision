@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "photo")
 data class PhotoEntity(
-    val cameras: List<String>,
+    val cameras: String,
     val earth_date: String,
     @PrimaryKey
     val sol: Int,

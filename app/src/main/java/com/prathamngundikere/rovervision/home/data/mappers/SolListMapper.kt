@@ -6,7 +6,7 @@ import com.prathamngundikere.rovervision.home.domain.model.Photo
 
 fun PhotoDto.toPhotoEntity(): PhotoEntity {
     return PhotoEntity(
-        cameras = cameras ?: emptyList(),
+        cameras = cameras?.joinToString(",") ?: "",
         earth_date = earth_date ?: "",
         sol = sol ?: 0,
         total_photos = total_photos ?: 0

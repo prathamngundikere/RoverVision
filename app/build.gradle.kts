@@ -21,24 +21,25 @@ android {
         versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        val localProperties = Properties()
+        val localPropertiesFile = File(rootDir, "local.properties")
+        if (localPropertiesFile.exists() && localPropertiesFile.isFile) {
+            localPropertiesFile.inputStream().use {
+                localProperties.load(it)
+            }
+        }
+        buildConfigField("String", "API", localProperties.getProperty("API"))
     }
 
-    val localProperties = Properties()
-    val localPropertiesFile = File(rootDir, "secrete.properties")
-    if (localPropertiesFile.exists() && localPropertiesFile.isFile) {
-        localPropertiesFile.inputStream().use {
-            localProperties.load(it)
-        }
-    }
+
 
     buildTypes {
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "api", localProperties.getProperty("api"))
         }
     }
     compileOptions {
