@@ -1,10 +1,10 @@
-package com.prathamngundikere.rovervision.home.presentation
+package com.prathamngundikere.rovervision.solImages.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.prathamngundikere.rovervision.core.util.Resource
-import com.prathamngundikere.rovervision.home.domain.repository.SolListRepository
-import com.prathamngundikere.rovervision.home.util.SolListState
+import com.prathamngundikere.rovervision.solImages.domain.repository.SolPhotosRepository
+import com.prathamngundikere.rovervision.solImages.util.SolPhotoState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,46 +14,40 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SolListViewModel @Inject constructor(
-    private val solListRepository: SolListRepository
+class SolPhotoViewModel @Inject constructor(
+    private val solPhotosRepository: SolPhotosRepository
 ): ViewModel() {
 
-    private var _solListState = MutableStateFlow(SolListState())
-    val solListState = _solListState.asStateFlow()
+    private var _solPhotoState = MutableStateFlow(SolPhotoState())
+    var solPhotoState = _solPhotoState.asStateFlow()
 
-    init {
-        getSolList()
-    }
-
-    private fun getSolList() {
+    fun getSolPhotoList(sol: Int) {
         viewModelScope.launch {
-            _solListState.update {
+            _solPhotoState.update {
                 it.copy(isLoading = true)
             }
 
-            solListRepository.getSolList().collectLatest {
+            solPhotosRepository.getSolPhotoList(sol).collectLatest {
                 when(it) {
                     is Resource.Error -> {
-                        _solListState.update {
+                        _solPhotoState.update {
                             it.copy(isLoading = false)
                         }
                     }
                     is Resource.Loading -> {
-                        _solListState.update {
-                            it.copy(
-                                isLoading = it.isLoading
-                            )
+                        _solPhotoState.update {
+                            it.copy(isLoading = it.isLoading)
                         }
                     }
                     is Resource.Success -> {
                         it.data?.let { photoList ->
-                            _solListState.update {
+                            _solPhotoState.update {
                                 it.copy(
-                                    photoList = photoList
+                                    photosList = photoList
                                 )
                             }
                         }
-                        _solListState.update {
+                        _solPhotoState.update {
                             it.copy(isLoading = false)
                         }
                     }

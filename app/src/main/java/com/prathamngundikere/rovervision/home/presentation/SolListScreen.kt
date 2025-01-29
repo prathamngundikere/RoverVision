@@ -1,5 +1,6 @@
 package com.prathamngundikere.rovervision.home.presentation
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.prathamngundikere.rovervision.core.util.SolImageScreenNav
 import com.prathamngundikere.rovervision.home.util.SolListState
 
 @Composable
@@ -50,7 +52,17 @@ fun SolListScreen(
                 }
             ) {
                 Column(
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable(
+                            enabled = true,
+                            onClick = {
+                                navController.navigate(SolImageScreenNav(
+                                    sol = it.sol
+                                ))
+                            }
+                        )
+
                 ){
                     Text(
                         text = it.sol.toString(),

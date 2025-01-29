@@ -4,3 +4,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 object SolListScreenNav
+
+@Serializable
+data class SolImageScreenNav(
+    val sol: Int
+)
