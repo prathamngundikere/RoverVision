@@ -9,10 +9,6 @@ interface SolListApi {
 
     @GET("manifests/curiosity")
     suspend fun getSolList(
-        @Query("api_key") api: String = API_KEY
+        @Query("api_key") api: String = BuildConfig.API
     ): SolManifestDto
-
-    companion object {
-        const val API_KEY = BuildConfig.API
-    }
 }

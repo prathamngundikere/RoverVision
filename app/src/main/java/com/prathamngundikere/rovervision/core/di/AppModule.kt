@@ -6,6 +6,9 @@ import com.prathamngundikere.rovervision.core.database.AppDatabase
 import com.prathamngundikere.rovervision.home.data.remote.SolListApi
 import com.prathamngundikere.rovervision.home.data.repository.SolListRepositoryImpl
 import com.prathamngundikere.rovervision.home.domain.repository.SolListRepository
+import com.prathamngundikere.rovervision.solImages.data.remote.SolImagesApi
+import com.prathamngundikere.rovervision.solImages.data.repository.SolPhotosRepositoryImpl
+import com.prathamngundikere.rovervision.solImages.domain.repository.SolPhotosRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -40,6 +43,17 @@ object AppModule {
             .create(SolListApi::class.java)
     }
 
+    @Singleton
+    @Provides
+    fun provideSolImagesApi(): SolImagesApi {
+        return Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("https://api.nasa.gov/mars-photos/api/v1/")
+            .client(client)
+            .build()
+            .create(SolImagesApi::class.java)
+    }
+
     @Provides
     @Singleton
     fun provideAppDatabase(app: Application): AppDatabase {
@@ -56,5 +70,13 @@ object AppModule {
         appDatabase: AppDatabase
     ): SolListRepository {
         return SolListRepositoryImpl(solListApi, appDatabase)
+    }
+
+    @Provides
+    fun providesSolImageRepo(
+        solImagesApi: SolImagesApi,
+        appDatabase: AppDatabase
+    ): SolPhotosRepository {
+        return SolPhotosRepositoryImpl(solImagesApi, appDatabase)
     }
 }
