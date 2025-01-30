@@ -5,10 +5,7 @@ RoverVision is an Android application that fetches high-quality images captured 
 ## Features
 - 📸 **View Mars Rover Images** - Browse high-quality images taken by the Curiosity rover.
 - 🗂️ **Organized by Sols (Martian Days)** - Images are categorized by the specific sol (day) they were captured on Mars.
-- 🔍 **Image Zoom Feature** - Zoom into images for a detailed look at the Martian surface.
-- ⬇️ **Download Images** - Save images directly to your device.
 - 🔄 **Offline Caching** - View previously loaded images without an internet connection.
-- 🔍 **Search by Camera Type** - Filter images based on different rover cameras.
 - 🛠 **Material 3 UI Design** - Modern and smooth UI following Google's Material 3 guidelines.
 - ⚡ **Optimized Performance** - Efficient image loading and caching for a seamless experience.
 
