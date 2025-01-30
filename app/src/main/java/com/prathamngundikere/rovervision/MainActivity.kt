@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.prathamngundikere.rovervision.core.presentation.MainScreen
-import com.prathamngundikere.rovervision.ui.theme.RoverVisionTheme
+import com.prathamngundikere.rovervision.ui.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -14,7 +14,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            RoverVisionTheme {
+            AppTheme {
                 MainScreen()
             }
         }
